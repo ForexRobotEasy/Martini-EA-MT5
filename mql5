@@ -1,0 +1,187 @@
+
+
+// Expert Advisor for Martini EA MT5
+
+
+
+// Define the necessary input parameters
+
+input string Pair1 = 'GBPUSD';
+
+input string Pair2 = 'AUDUSD';
+
+input string Pair3 = 'EURUSD';
+
+input string Pair4 = 'GBPAUD';
+
+input string Pair5 = 'EURAUD';
+
+
+
+// Define the scalping strategy parameters
+
+input int ScalpingTimeStart = 22; // Start scalping at 22:00
+
+input int ScalpingTimeEnd = 6; // End scalping at 06:00
+
+
+
+// Define the pending order placement parameters
+
+input int PendingOrderHour1 = 0; // Place pending orders at 00:00
+
+input int PendingOrderHour2 = 4; // Place pending orders at 04:00
+
+input int PendingOrderHour3 = 8; // Place pending orders at 08:00
+
+input int PendingOrderHour4 = 12; // Place pending orders at 12:00
+
+
+
+// Define the trade management parameters
+
+input int TP = 50; // Take profit in pips
+
+input int SL = 30; // Stop loss in pips
+
+input int TrailingStop = 20; // Trailing stop in pips
+
+
+
+// Define the main function
+
+void OnTick()
+
+{
+
+    // Check if the current time is within the scalping time range
+
+        if (Hour() >= ScalpingTimeStart || Hour() <= ScalpingTimeEnd)
+
+            {
+
+                    // Check if the current time matches any of the pending order placement times
+
+                            if (Hour() == PendingOrderHour1 || Hour() == PendingOrderHour2 || Hour() == PendingOrderHour3 || Hour() == PendingOrderHour4)
+
+                                    {
+
+                                                // Place pending orders for each forex pair
+
+                                                            PlacePendingOrder(Pair1);
+
+                                                                        PlacePendingOrder(Pair2);
+
+                                                                                    PlacePendingOrder(Pair3);
+
+                                                                                                PlacePendingOrder(Pair4);
+
+                                                                                                            PlacePendingOrder(Pair5);
+                                                                                                            
+                                                                                                                    }
+                                                                                                                    
+                                                                                                                        }
+                                                                                                                        
+                                                                                                                        }
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        
+                                                                                                                        // Function to place a pending order
+                                                                                                                        
+                                                                                                                        void PlacePendingOrder(string pair)
+                                                                                                                        
+                                                                                                                        {
+                                                                                                                        
+                                                                                                                            // Calculate the entry price and stop loss level based on the current market conditions
+                                                                                                                            
+                                                                                                                                double entryPrice = CalculateEntryPrice(pair);
+                                                                                                                                
+                                                                                                                                    double stopLoss = entryPrice - SL * Point();
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                    
+                                                                                                                                        // Place the pending order
+                                                                                                                                        
+                                                                                                                                            int ticket = OrderSend(pair, OP_SELLLIMIT, entryPrice, 0, 0, stopLoss, entryPrice + TP * Point(), 'Martini EA MT5', 0, 0, clrRed);
+                                                                                                                                            
+                                                                                                                                                
+                                                                                                                                                
+                                                                                                                                                    // Set the hidden profit booking mechanism for the pending order
+                                                                                                                                                    
+                                                                                                                                                        if (ticket > 0)
+                                                                                                                                                        
+                                                                                                                                                            {
+                                                                                                                                                            
+                                                                                                                                                                    OrderSelect(ticket, SELECT_BY_TICKET);
+                                                                                                                                                                    
+                                                                                                                                                                            OrderSetInteger(ORDER_PROPERTY_HIDDEN_TP, TP * Point());
+                                                                                                                                                                            
+                                                                                                                                                                                }
+                                                                                                                                                                                
+                                                                                                                                                                                }
+                                                                                                                                                                                
+                                                                                                                                                                                
+                                                                                                                                                                                
+                                                                                                                                                                                // Function to calculate the entry price based on the current market conditions
+                                                                                                                                                                                
+                                                                                                                                                                                double CalculateEntryPrice(string pair)
+                                                                                                                                                                                
+                                                                                                                                                                                {
+                                                                                                                                                                                
+                                                                                                                                                                                    // Implement the logic to determine the highly probable entry points using linked numbers and settings
+                                                                                                                                                                                    
+                                                                                                                                                                                        // ...
+                                                                                                                                                                                        
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                                return 0; // Placeholder return value, replace with actual calculation
+                                                                                                                                                                                                
+                                                                                                                                                                                                }
+                                                                                                                                                                                                
+                                                                                                                                                                                                
+                                                                                                                                                                                                
+                                                                                                                                                                                                // Function for trade management and execution
+                                                                                                                                                                                                
+                                                                                                                                                                                                void ManageTrades()
+                                                                                                                                                                                                
+                                                                                                                                                                                                {
+                                                                                                                                                                                                
+                                                                                                                                                                                                    // Implement the logic for trade management and execution, including trailing stop
+                                                                                                                                                                                                    
+                                                                                                                                                                                                        // ...
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        // Function to optimize and test the expert advisor on real account data
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        void OptimizeAndTest()
+                                                                                                                                                                                                        
+                                                                                                                                                                                                        {
+                                                                                                                                                                                                        
+                                                                                                                                                                                                            // Implement the optimization and testing logic using real account data
+                                                                                                                                                                                                            
+                                                                                                                                                                                                                // ...
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                }
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                // Main entry point of the expert advisor
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                int OnInit()
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                {
+                                                                                                                                                                                                                
+                                                                                                                                                                                                                    // Optimize and test the expert advisor
+                                                                                                                                                                                                                    
+                                                                                                                                                                                                                        OptimizeAndTest();
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                        
+                                                                                                                                                                                                                            return(INIT_SUCCEEDED);
+                                                                                                                                                                                                                            
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                            
+                                                                                                                                                                                                                            
